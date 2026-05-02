@@ -163,7 +163,7 @@ export class MemberProfilePage {
     }).subscribe({
       next: ({ profile, hasPenalty, hasBalance }) => {
         this.profile.set(profile);
-        this.memberSession.setMember(profile);
+        this.memberSession.setMember(profile, this.memberSession.token() ?? undefined);
         this.hasPenalty.set(hasPenalty);
         this.hasBalance.set(hasBalance);
         this.loading.set(false);

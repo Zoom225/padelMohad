@@ -13,6 +13,7 @@ interface MemberSessionState {
 @Injectable({ providedIn: 'root' })
 export class MemberSessionService {
   private readonly sessionState = signal<MemberSessionState | null>(this.loadFromStorage());
+  private readonly authApi = inject(AuthApiService);
 
   readonly member = computed(() => this.sessionState()?.member ?? null);
   readonly memberId = computed(() => this.sessionState()?.member.id ?? null);
@@ -35,12 +36,11 @@ export class MemberSessionService {
    * Authentifie un membre et stocke le token + membre en session
    */
   login(matricule: string): Observable<MembreResponse> {
-    const authApi = inject(AuthApiService);
     const payload: LoginRequest = { matricule };
-    return authApi.loginMembre(payload).pipe(
+    return this.authApi.loginMembre(payload).pipe(
       tap((response: MembreResponse) => {
         this.setMember(response, response.token);
-      })
+      }),
     );
   }
 
