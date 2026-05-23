@@ -2,18 +2,23 @@ package com.padelPlay.match.dto;
 
 import com.padelPlay.entity.enums.StatutMatch;
 import com.padelPlay.entity.enums.TypeMatch;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public record MatchDto(
     Long id,
     Long terrainId,
-    String nomTerrain,
+    String terrainNom,
+    String siteNom,
     Long organisateurId,
-    String nomOrganisateur,
-    LocalDateTime dateDebut,
-    LocalDateTime dateFin,
+    String organisateurNom,
+    LocalDate date,
+    LocalTime heureDebut,
+    LocalTime heureFin,
     TypeMatch typeMatch,
     StatutMatch statut,
     Integer nbJoueursActuels,
-    Double prixParJoueur
+    Double prixParJoueur,
+    LocalDateTime dateConversionPublic
 ) {}
